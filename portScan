@@ -1,0 +1,38 @@
+import socket
+import subprocess
+import sys
+from datetime import datetime
+
+#****Special thanks to pythonforbeginners.com for helping me to understand sockets in Python and walking me through creating this port scanner****
+
+# Don't think I will need this...leaving out for now. Use to clear screen
+# subprocess.call('clear', shell=True)
+
+# Define the server that will be scanned from the internal network. This is using a random server owned by someone else. Change the host to your own server if you have one.
+targetServerHostname = "portquiz.net"
+
+# Scan Banner
+print ("Scanning an external server to determine what ports are open outbound:")
+print ("Target Server = ", targetServerHostname)
+
+startTime = datetime.now()
+
+try:
+    for port in range (1,65535):
+        sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        result = sock.connect_ex((targetServerHostname, port))
+        if result == 0:
+            print ("Port {}:     Open".format(port))
+        sock.close()
+
+except KeyboardInterrupt:
+    sys.exit("Scan aborted - Keyboard Interrupt Received")
+
+except socket.gaierror:
+    sys.exit("Something is wrong with the target server. It may be down or invalid. Change the script to another server if you can")
+
+endTime = datetime.now()
+
+scanTime = endTime - startTime
+
+print ("Scan completed after ", scanTime, " !")
