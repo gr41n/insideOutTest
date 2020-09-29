@@ -1,8 +1,5 @@
 # insideOutTest
-Tool to automate the process of testing what traffic and data can get from inside of the network, out. 
-
-
-This is a personal project for me to learn some more Python skillz so keep in mind that there may be much better/faster ways to accomplish some of the features of this tool. For example, this will scan all 65535 ports on a server which is quite slow in Python. I may change this script in the future to do something differently. 
+Haven't quite finished work on this one. It was a tool to automate the process of testing what traffic and data can get from inside of the network, out. Goal was to test the following...
 
 Feature Goals:
 - External Port Scan
